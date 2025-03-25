@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\comuna;  
+use Illuminate\Support\Facades\DB;   
 
 class comunacontroller extends Controller
 {
@@ -12,7 +13,10 @@ class comunacontroller extends Controller
      */
     public function index()
     {
-        $comunas = comuna::all();
+       $comunas = DB::table('tb_comuna')
+       ->join('tb_municipio', 'tb_comuna.muni_codi', '=', 'tb_municipio.muni_codi')
+       ->select('tb_comuna.*', 'tb_municipio.muni_nomb') 
+       ->get();     
         return view ('comuna.index',['comunas'=>$comunas]);   
     }
 
