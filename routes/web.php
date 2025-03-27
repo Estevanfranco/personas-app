@@ -3,6 +3,9 @@
 use App\Http\Controllers\comunacontroller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PaisController;
+use App\Http\Controllers\MunicipioController; 
+
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -23,3 +26,8 @@ Route::get('/paises/create', [PaisController::class, 'create'])->name('paises.cr
 Route::delete('/paises/{pais}', [PaisController::class, 'destroy'])->name('paises.destroy');
 Route::get('/paises/{pais}/edit', [PaisController::class, 'edit'])->name('paises.edit');
 Route::put('/paises/{pais}', [PaisController::class, 'update'])->name('paises.update');
+
+//rua municipio
+Route::get('/municipios', [MunicipioController::class, 'index'])->name('municipios.index'); 
+Route::post('/municipios', [MunicipioController::class, 'store'])->name('municipios.store'); 
+Route::get('/municipios/create', [MunicipioController::class, 'create'])->name('municipios.create');

@@ -3,21 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\comuna;  
-use Illuminate\Support\Facades\DB;   
+use App\Models\Municipio;
+use Illuminate\Support\Facades\DB;
 
-class comunacontroller extends Controller
+class MunicipioController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-       $comunas = DB::table('tb_comuna')
-       ->join('tb_municipio', 'tb_comuna.muni_codi', '=', 'tb_municipio.muni_codi')
-       ->select('tb_comuna.*', 'tb_municipio.muni_nomb') 
-       ->get();     
-        return view ('comuna.index',['comunas'=>$comunas]);   
+        $municipios = DB::table('tb_municipio') 
+        ->join('tb_departamento', 'tb_municipio.depa_codi', '=', 'tb_departamento.depa_codi')
+        ->select('tb_municipio.*', 'tb_departamento.depa_nomb') 
+        ->get();
+        return view('municipio.index', ['municipios' => $municipios]);
     }
 
     /**
@@ -25,10 +25,10 @@ class comunacontroller extends Controller
      */
     public function create()
     {
-        $municipios = DB::table('tb_municipio')
-        ->orderby('muni_nomb')
+        $departamentos = DB::table('tb_departamento')
+        ->orderBy('depa_nomb')
         ->get();
-        return view('comuna.new',['municipios'=>$municipios]);  
+        return view('municipio.new',['departamentos' => $departamentos]);
     }
 
     /**
@@ -36,7 +36,7 @@ class comunacontroller extends Controller
      */
     public function store(Request $request)
     {
-    
+        //
     }
 
     /**
@@ -52,8 +52,7 @@ class comunacontroller extends Controller
      */
     public function edit(string $id)
     {
-        
-        
+        //
     }
 
     /**
@@ -61,8 +60,7 @@ class comunacontroller extends Controller
      */
     public function update(Request $request, string $id)
     {
-        
-
+        //
     }
 
     /**
@@ -70,6 +68,6 @@ class comunacontroller extends Controller
      */
     public function destroy(string $id)
     {
-        
+        //
     }
 }
