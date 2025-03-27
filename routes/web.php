@@ -31,3 +31,4 @@ Route::put('/paises/{pais}', [PaisController::class, 'update'])->name('paises.up
 Route::get('/municipios', [MunicipioController::class, 'index'])->name('municipios.index'); 
 Route::post('/municipios', [MunicipioController::class, 'store'])->name('municipios.store'); 
 Route::get('/municipios/create', [MunicipioController::class, 'create'])->name('municipios.create');
+Route::delete('municipio/{municipio}', [MunicipioController::class, 'destroy'])->name('municipios.destroy');
