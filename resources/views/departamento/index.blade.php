@@ -29,7 +29,11 @@
      <th scope="row">{{ $departamento->depa_codi }}</th>
      <td>{{ $departamento->depa_nomb }}</td>
      <td>{{ $departamento->pais_codi }}</td>
+     <td>
+        <a href="{{ route('departamentos.edit', ['departamento' => $departamento->depa_codi]) }}" 
+            class="btn btn-warning">Edit</a>
      
+     </td>
      
    </tr>
     @endforeach
