@@ -33,7 +33,12 @@ class PaisController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pais = new Pais();
+        $pais->pais_codi = $request->input('pais_codi');
+        $pais->pais_nomb = $request->input('pais_nomb');
+        $pais->pais_capi = $request->input('pais_capi');
+        $pais->save();
+        return redirect()->route('paises.index');
     }
 
     /**
@@ -41,7 +46,7 @@ class PaisController extends Controller
      */
     public function show(string $id)
     {
-        //
+        
     }
 
     /**
@@ -49,7 +54,8 @@ class PaisController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $pais = Pais::findOrFail($id);
+        return view('paises.edit', compact('pais')); 
     }
 
     /**
@@ -57,7 +63,10 @@ class PaisController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $pais = Pais::findOrFail($id);
+        $pais->pais_nomb = $request->input('pais_nomb');
+        $pais->save();
+        return redirect()->route('paises.index');
     }
 
     /**
@@ -65,6 +74,8 @@ class PaisController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $pais = Pais::findOrFail($id);
+        $pais->delete();
+        return redirect()->route('paises.index');
     }
 }

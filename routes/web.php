@@ -18,3 +18,8 @@ Route::get('/comunas/{comuna}/edit', [comunacontroller::class, 'edit'])-> name('
 
 //rua pais
 Route::get('/paises', [PaisController::class, 'index'])->name('paises.index');
+Route::post('/paises', [PaisController::class, 'store'])->name('paises.store');
+Route::get('/paises/create', [PaisController::class, 'create'])->name('paises.create');
+Route::delete('/paises/{pais}', [PaisController::class, 'destroy'])->name('paises.destroy');
+Route::get('/paises/{pais}/edit', [PaisController::class, 'edit'])->name('paises.edit');
+Route::put('/paises/{pais}', [PaisController::class, 'update'])->name('paises.update');

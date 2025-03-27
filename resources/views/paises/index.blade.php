@@ -13,7 +13,7 @@
   <body>
     <div class="container">
         <h1>Lista de Paises</h1>
-       
+        <a href="{{ route('paises.create') }}" class="btn btn-success">Add</a>
         <table class="table">
           <thead>
             <tr>
@@ -29,8 +29,16 @@
      <th scope="row">{{ $p->pais_codi }}</th>
      <td>{{ $p->pais_nomb }}</td>
      <td>{{ $p->pais_capi }}</td>
-    
-      
+      <td>
+        <a href="{{ route('paises.edit' , ['pais' => $p->pais_codi]) }}"
+             class="btn btn-warning">Edit</a>
+        <form action="{{ route('paises.destroy' , ['pais' =>$p->pais_codi]) }}"
+        method="POST" style="display: inline-block;">
+        @method('delete')
+        @csrf
+        <input class="btn btn-danger" type="submit" value="Delete">
+        </form>
+      </td>
    </tr>
     @endforeach
   </tbody>
