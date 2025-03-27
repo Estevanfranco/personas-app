@@ -23,7 +23,7 @@ class PaisController extends Controller
     public function create()
     {
         $pais = DB::table('tb_pais')
-        ->select('pais_codi', 'pais_nomb')
+        ->select('pais_codi')
         ->get();
     return view('paises.new', ['paises' => $pais]);
     }
@@ -65,6 +65,7 @@ class PaisController extends Controller
     {
         $pais = Pais::findOrFail($id);
         $pais->pais_nomb = $request->input('pais_nomb');
+        $pais->pais_capi = $request->input('pais_capi');
         $pais->save();
         return redirect()->route('paises.index');
     }

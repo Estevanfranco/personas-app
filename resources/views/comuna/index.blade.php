@@ -15,7 +15,7 @@
    <div class="container">
     
    <h1>Listado de comunas</h1>
-    <a href="{{route('comunas.create')}}" class="btn btn-succes">add</a>
+    <a href="{{route('comunas.create')}}" class="btn btn-success">add</a>
     <table class="table">
   <thead>
     <tr>
