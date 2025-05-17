@@ -38,12 +38,7 @@
       class="btn btn-info"> Edit </a>
 
 
-      <form action="{{ route('comunas.destroy', ['comuna' => $comuna->comu_codi]) }}" 
-            method="POST" style="display: inline-block">
-          @method('delete')
-          @csrf
-          <input class="btn btn-danger" type="submit" value="Delete">
-      </form>
+     
       </td>
 
 

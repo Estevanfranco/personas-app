@@ -92,6 +92,9 @@ class DepartamentoController extends Controller
     public function destroy(string $id)
     {
         $departamento = Departamento::find($id);
+        if (!$departamento) {
+            return redirect()->route('departamento.index')->with('error', 'Comuna no encontrada.');
+        }
         $departamento->delete();
         
         $departamentos = DB::table('tb_departamento')
