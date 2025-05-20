@@ -27,21 +27,10 @@ class ComunaController extends Controller
     public function store(Request $request)
     {
 
-        $validate = validator::make($request->all(), [
-            'comu_nomb' => ['required','max:255','unique'],
-            'muni_codi' => ['required','numeric','min:1'],
-        ]);
-
-        if ($validate->fails()) {
-            return response()->json([
-                'msg' => 'Error',
-                'statuscode' => 400
-            ]);
-        }
-
+     
         $comuna = new Comuna();
-        $comuna->comu_nomb = $request->name;
-        $comuna->muni_codi = $request->code;
+        $comuna->comu_nomb = $request->comu_nomb;
+        $comuna->muni_codi = $request->muni_codi;
         $comuna->save();
 
         $comunas = DB::table('tb_comuna')
@@ -57,9 +46,6 @@ class ComunaController extends Controller
     public function show(string $id)
     {
         $comuna = Comuna::find($id); 
-        if (is_null($comuna)) {
-            return abort (404);
-        }
         $municipios = DB::table('tb_municipio')
         ->orderBy('muni_nomb')
         ->get();
@@ -72,23 +58,7 @@ class ComunaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-           $validate = validator::make($request->all(), [
-            'comu_nomb' => ['required','max:255','unique'],
-            'muni_codi' => ['required','numeric','min:1'],
-        ]);
-
-        if ($validate->fails()) {
-            return response()->json([
-                'msg' => 'Error no se encuentra ',
-                'statuscode' => 400
-            ]);
-        }
-
-
-          $comuna = Comuna::find($id); 
-        if (is_null($comuna)) {
-            return abort (404);
-        }
+        
         $comuna = Comuna::find($id);
         $comuna->comu_nomb = $request->comu_nomb;
         $comuna->muni_codi = $request->muni_codi;
@@ -102,10 +72,7 @@ class ComunaController extends Controller
      */
     public function destroy(string $id)
     {
-          $comuna = Comuna::find($id); 
-        if (is_null($comuna)) {
-            return abort (404);
-        }
+        
         $comuna = Comuna::find($id);
         $comuna->delete();
         $comunas = DB::table('tb_comuna')
