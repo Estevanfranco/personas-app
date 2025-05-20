@@ -12,13 +12,12 @@ class ComunaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+   public function index()
     {
-          $comunas = DB::table('tb_comuna')
+        $comunas = DB::table('tb_comuna')
             ->join('tb_municipio', 'tb_comuna.muni_codi', '=', 'tb_municipio.muni_codi')
-            ->select('tb_comuna.*', "tb_municipio.muni_nomb")
+            ->select('tb_comuna.*', 'tb_municipio.muni_nomb')
             ->get();
-            
         return json_encode(['comunas' => $comunas]);
     }
 
@@ -41,11 +40,15 @@ class ComunaController extends Controller
         }
 
         $comuna = new Comuna();
-        $comuna->comu_nomb = $request->comu_nomb;
-        $comuna->muni_codi = $request->muni_codi;
+        $comuna->comu_nomb = $request->name;
+        $comuna->muni_codi = $request->code;
         $comuna->save();
 
-        return json_encode(['comuna' => $comuna]);
+        $comunas = DB::table('tb_comuna')
+            ->join('tb_municipio', 'tb_comuna.muni_codi', '=', 'tb_municipio.muni_codi')
+            ->select('tb_comuna.*', "tb_municipio.muni_nomb")
+            ->get();
+        return view('comuna.index', ['comunas' => $comunas]);
     }
 
     /**
